@@ -15,6 +15,9 @@ resource "azurerm_network_security_group" "web_subnet_nsg" {
 
 #Resource-3: Association NSG and Subnet
 resource "azurerm_subnet_network_security_group_association" "web_subnet_nsg_association" {
+    depends_on = [
+        azurerm_network_security_rule.web_nsg_rule_inbound
+    ]
     subnet_id = azurerm_subnet.websubnet.id
     network_security_group_id = azurerm_network_security_group.web_subnet_nsg.id
 }
